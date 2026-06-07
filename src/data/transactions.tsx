@@ -2,12 +2,20 @@ export enum TypeTransaction {
     DEPOSIT, TRANSFER, INVESTMENT
 }
 
-export interface Transaction {
+export class Transaction {
     id: number;
     type: TypeTransaction;
     amount: number;
     description: string;
     transactionDate: Date;
+
+    constructor() {
+        this.id = 0;
+        this.type = TypeTransaction.DEPOSIT;
+        this.amount = 0;
+        this.description = "";
+        this.transactionDate = new Date();
+    }
 }
 
 export interface Account {
@@ -71,4 +79,8 @@ export const transactionResponse: ApiTransaction = {
 
 export function getTransactions(): Transaction[] {
     return transactionResponse.transactions;
+}
+
+export function getTransaction(id: string): Transaction | undefined {
+    return transactionResponse.transactions.find(transaction => transaction.id.toString() === id) || new Transaction();
 }

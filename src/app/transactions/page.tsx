@@ -12,16 +12,20 @@ export default function Transacoes() {
         <section>
             <h2 className="flex items-center text-lg font-semibold text-blue-900">Transações</h2>
             <section>
+                <ul>
                 {transactions.length > 0 ? (
+
                     transactions.map((transaction) => (
-                        <div key={transaction.id}>
-                            <p>{transaction.description}</p>
-                            <p>{currencyFormatter.format(transaction.amount)}</p>
-                        </div>
+                        <li key={transaction.id} className="flex justify-between border-b py-2">
+                            <span>{transaction.description} - {currencyFormatter.format(transaction.amount)}</span>
+                            <a href={`/transactions/${transaction.id}`} className="text-blue-500 hover:underline">Ver Detalhes</a>
+                        </li>
                     ))
+
                 ) : (
-                    <p>Nenhuma transação encontrada.</p>
+                    <li>Nenhuma transação encontrada.</li>
                 )}
+                </ul>
             </section>
         </section>
     )
