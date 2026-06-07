@@ -35,7 +35,10 @@ export function Header() {
                         Projects
                     </Link>
                      
-                    <button className="rounded-md px-3 right-0 text-sm font-medium text-gray-900 bg-amber-300 hover:bg-amber-400 cursor-pointer">
+                    <button   onClick={e => {
+        e.preventDefault();
+        window.location.href = "/transactions/create";
+      }} className="rounded-md px-3 right-0 text-sm font-medium text-gray-900 bg-amber-300 hover:bg-amber-400 cursor-pointer">
                         Criar Transação
                     </button>
 
