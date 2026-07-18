@@ -1,13 +1,13 @@
-import { getTransactions } from "@/data/transactions";
+import { fetchTransactions } from "../services/transactions";
 
-const transactions = getTransactions();
+const { transactions } = await fetchTransactions();
 
 const currencyFormatter = new Intl.NumberFormat("pt-BR", {
     style: "currency",
     currency: "BRL",
 });
 
-export default function Transacoes() {
+export default async function Transacoes() {
     return(
         <section>
             <h2 className="flex items-center text-lg font-semibold text-blue-900">Transações</h2>
