@@ -20,10 +20,11 @@
     ],
     "paths": {
       "@/*": ["./src/*"],
-      "@ui/*": ["./src/components/ui/*"],
+      "@ui/*": ["./src/ui/*"],
       "@models/*": ["./src/models/*"],
       "@services/*": ["./src/app/services/*"],
-      "@api/*": ["./src/api/*"]
+      "@api/*": ["./src/app/api/*"],
+      "@shared/*": ["./src/app/(shared)/*"]
     }
   },
   "include": [

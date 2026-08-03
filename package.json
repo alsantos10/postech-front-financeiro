@@ -3,26 +3,30 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
+    "build": "next build",
     "dev": "next dev",
     "dev:all": "concurrently \"npm run dev:start\" \"npm run dev:api\"",
-    "build": "next build",
-    "start": "next start",
-    "lint": "eslint",
     "dev:start": "next dev",
-    "dev:api": "json-server --watch db.json5 --port 3001",
+    "dev:api": "json-server --watch db.json --port 3001",
+    "lint": "next lint",
+    "start": "next start",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build"
   },
   "dependencies": {
     "@headlessui/react": "^2.2.10",
     "@heroicons/react": "^2.2.0",
+    "@hookform/resolvers": "^5.4.0",
+    "@tanstack/react-table": "^8.21.3",
     "json-server": "^1.0.0-beta.15",
+    "lucide-react": "^1.25.0",
     "next": "16.2.7",
     "react": "19.2.4",
     "react-dom": "19.2.4",
     "react-hook-form": "^7.80.0",
     "react-input-mask": "^2.0.4",
-    "save-dev": "^0.0.1-security"
+    "react-toastify": "^11.1.0",
+    "zod": "^4.4.3"
   },
   "devDependencies": {
     "@chromatic-com/storybook": "^5.2.1",

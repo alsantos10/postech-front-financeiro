@@ -2,8 +2,13 @@
 
 import { useForm } from "react-hook-form";
 
+import { SubmitEvent, useState } from 'react';
 import Image from "next/image";
-import Modal from "@/components/ui/modal";
+import Modal from "@/ui/modal";
+import { User } from "@/infra/types/users";
+import { createUser } from "@/app/services/users";
+import { redirect } from "next/navigation";
+import { toast } from "react-toastify";
 
 export interface RegisterProps {
     name: string,
@@ -13,17 +18,44 @@ export interface RegisterProps {
 }
 
 export default function RegisterModal() {
+
+    const notify = () => toast.success("Usuário criado com sucesso!");
     
     const { handleSubmit, register, formState: {errors}, setError } = useForm<RegisterProps>();
-    
-    const sendData = (data: RegisterProps) => {
-        console.log(data);
-        const { name, email, password, readedConfirm } = data;
+    const [isOpen, setIsOpen] = useState(true);
+    const [loading, setLoading] = useState(false);
+
+    const sendData = async (userEvent: SubmitEvent<HTMLFormElement>) => {
+
+        userEvent.preventDefault()
+        setLoading(true)
+        const formData = new FormData(userEvent.currentTarget)
+
+        const name = formData.get('name')
+        const email = formData.get('email')
+        const password = formData.get('password')
+        const readedConfirm = formData.get('readedConfirm')
+
+        const userRequest: User = {
+            name: name as string,
+            email: email as string,
+            password: password as string
+        };
 
         if (readedConfirm) {
-            
+            throw new Error("Você deve confirmar a leitura da política de privacidade");
         }
-        
+
+        const response = await createUser(userRequest);
+        const data = await response.user;
+
+        // exibir mensagem de sucesso ou erro com base na resposta da API
+        if (data) {
+            notify();
+        }
+
+        setIsOpen(false)
+        redirect("/")
     }
 
     const validateEmail = (email: string) => {
@@ -34,16 +66,16 @@ export default function RegisterModal() {
     const hasError = Object.keys(errors).length > 0;
 
     return (
-        <Modal>
+        <Modal isOpen={isOpen}>
             <div className="flex flex-col items-center p-4">
-                <Image src="/IlustraLogin.svg" alt="Ilustração de login" width={220} height={220} preload={true} />
+                <Image src="/IlustraLogin.svg" alt="Ilustração de login" width={220} height={220} preload={true} className="w-full h-auto" />
             </div>
 
             <h3>
                 Preencha os campos abaixo para criar sua conta corrente!
             </h3>
 
-            <form className="flex flex-col gap-4 p-4" onSubmit={handleSubmit(sendData)}>
+            <form className="flex flex-col gap-4 p-4" onSubmit={sendData}>
                 <div>
                     <label htmlFor="name" className="block text-sm font-medium text-gray-700">
                         Nome

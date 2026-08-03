@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono, Inter } from "next/font/google";
 import "./globals.css";
-import { Footer } from "@/components/footer";
-import { Header } from "@/components/header";
+import { ToastContainer } from "react-toastify";
+import { AuthProvider } from "@/ui/context/AuthContext";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -25,29 +25,18 @@ export const metadata: Metadata = {
 };
 
 export default function RootLayout({
-  auth,
-  user,
-  children,
-}: Readonly<{
-  auth: React.ReactNode;
-  user: React.ReactNode;
-  children: React.ReactNode;
-}>) {
+  children, auth
+}: Readonly<{children: React.ReactNode; auth: React.ReactNode}>) {
   return (
     <html
       lang="en"
       className={`${geistSans.variable} ${geistMono.variable} ${inter.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col">
-        
-    <div className="flex min-h-screen flex-col">
-        {/* <Demos /> */}
-        <Header />
-        {children}
-        {auth}
-        {user}
-        <Footer />
-        </div>
+          <AuthProvider>
+            {children}
+            {auth}
+          </AuthProvider>
       </body>
     </html>
   );
