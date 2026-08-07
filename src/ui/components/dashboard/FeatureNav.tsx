@@ -1,9 +1,10 @@
-import { LayoutDashboard, LayoutList, Settings, User, Users } from "lucide-react";
+import { LayoutDashboard, LayoutFreeformIcon, LayoutList, Settings, User, Users } from "lucide-react";
 import Link from "next/link";
 
 const links = [
     {href: "/painel", label: "Painel", icon: LayoutDashboard},
     {href: "/painel/transactions", label: "Transações", icon: LayoutList},
+    {href: "/painel/transactions/create", label: "Nova Transação", icon: LayoutFreeformIcon},
     {href: "/painel/users", label: "Usuários", icon: Users},
     {href: "/painel/profile", label: "Perfil", icon: User},
     {href: "/painel/settings", label: "Configurações", icon: Settings},

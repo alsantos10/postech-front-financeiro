@@ -24,3 +24,10 @@ export class Transaction {
         this.transactionDate = new Date();
     }
 }
+
+export const TRANSACTION_OPTIONS = [
+    TypeTransaction.DEPOSIT, 
+    TypeTransaction.TRANSFER, 
+    TypeTransaction.INVESTMENT, 
+    TypeTransaction.PAYMENT
+];

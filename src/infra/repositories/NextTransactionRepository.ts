@@ -30,8 +30,17 @@ export class NextTransactionRepository implements TransactionRepository {
         return response.json();
     }
 
-    createTransactionForUser(userId: string, transactionData: Partial<UserTransaction>): Promise<UserTransaction> {
-        throw new Error("Method not implemented.");
+    async createTransactionForUser(transactionData: Partial<UserTransaction>): Promise<UserTransaction> {
+        const response = await fetch("/api/transactions", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ ...transactionData })
+        });
+        if (!response.ok) {
+            const error = await response.json();
+            throw new TransactionError(error.message || "Erro ao criar transação");
+        }
+        return response.json();
     }
 
     updateTransactionForUser(userId: string, transactionId: string, transactionData: Partial<UserTransaction>): Promise<UserTransaction> {

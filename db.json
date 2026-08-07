@@ -59,6 +59,38 @@
       "amount": 100,
       "transactionDate": "2023-01-08T00:00:00Z",
       "description": "Transaction 5"
+    },
+    {
+      "description": "112121",
+      "amount": 11,
+      "type": "DEPOSITO",
+      "transactionDate": "2026-08-07T05:10:57.630Z",
+      "userId": "L6HYCWwTlGY",
+      "id": "axcusiMYUD0"
+    },
+    {
+      "description": "dsadsa",
+      "amount": 221,
+      "type": "DEPOSITO",
+      "transactionDate": "2026-08-07T05:12:10.820Z",
+      "userId": "L6HYCWwTlGY",
+      "id": "O_NDO2hWWyw"
+    },
+    {
+      "description": "yuiyi",
+      "amount": 676,
+      "type": "PAGAMENTO",
+      "transactionDate": "2026-08-07T15:32:43.338Z",
+      "userId": "L6HYCWwTlGY",
+      "id": "rjle6quBFjc"
+    },
+    {
+      "description": "uiuiui",
+      "amount": 767,
+      "type": "TRANSFERENCIA",
+      "transactionDate": "2026-08-07T15:34:06.353Z",
+      "userId": "L6HYCWwTlGY",
+      "id": "ZcFs-z09Eds"
     }
   ],
   "$schema": "./node_modules/json-server/schema.json"

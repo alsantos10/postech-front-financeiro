@@ -3,8 +3,6 @@ import { User } from "@/core/entities/User";
 import { Paginated } from "@/core/entities/Paginated";
 import { Transaction, TypeTransaction } from "@/core/entities/Transactions";
 import { TransactionError } from "@/core/errors/TransactionError";
-import { getSessionCookie } from "../cookies/CookieTokenStorage";
-import { findUserByEmail } from "./JsonAuthService";
 
 const JSON_SERVER_URL = process.env.JSON_SERVER_URL || "http://localhost:3001";
 
@@ -18,8 +16,8 @@ export interface JsonTransaction {
     user: User | null;
 }
 
-interface IListDatagridTransactionsFilters extends IListDatagridFilters {
-    userId?: string;
+interface IListTransactionsDatagridFilters extends IListDatagridFilters {
+    user: User
 }
 
 function compareValues(a: string, b: string, order?: OrderType) {
@@ -27,32 +25,20 @@ function compareValues(a: string, b: string, order?: OrderType) {
     return order === OrderType.ASC ? comparizon : -comparizon;
 } 
 
-export async function fetchTransactions(filters: IListDatagridFilters): Promise<Paginated<Transaction>> {
-    const { page, limit, sort, order, term } = filters;
+export async function fetchTransactions(filters: IListTransactionsDatagridFilters): Promise<Paginated<Transaction>> {
+    const { page, limit, sort, order, term, user } = filters;
 
     const response = await fetch(`${JSON_SERVER_URL}/transactions`);
     if (!response.ok) {
         throw new TransactionError("Erro ao consultar transações do usuário");
     }
-    
-
-    const email = await getSessionCookie();
-    if (!email) {
-        throw new TransactionError("Usuário não autenticado");
-    }
-
-    const user = await findUserByEmail(email);
-    if (!user) {
-        throw new TransactionError("Usuário não encontrado");
-    }
 
     const body = await response.json();
         const allTransactions: JsonTransaction[] = Array.isArray(body) ? body : body.value || [];
         const userTransactions: JsonTransaction[] = allTransactions
-            .filter(transaction => transaction.userId === user.id)
-            .map(transaction => ({ ...transaction, user }));
+            .filter(t => t.userId === user.id)
+            .map(transaction => ({ ...transaction }));
 
-        
         const normalizedTerm = term?.trim().toLowerCase();
         console.log("Aqui", normalizedTerm, userTransactions);
     const filtered = normalizedTerm ?
@@ -86,4 +72,21 @@ export async function findTransactionsByUserId(userId: string): Promise<JsonTran
     }
     const transactions: JsonTransaction[] = await response.json();
     return transactions || null;
+}
+
+export async function createTransaction(description: string, amount: number, type: TypeTransaction, user: User): Promise<Transaction> {
+    const transactionDate = new Date();
+    const response = await fetch(`${JSON_SERVER_URL}/transactions`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({description, amount, type, transactionDate, userId: user.id}),
+    });
+
+    if(!response.ok) {
+        throw new TransactionError("Erro ao criar transação");
+    }
+    const transaction: JsonTransaction = await response.json();
+    return { id: transaction.id, type: transaction.type, amount: transaction.amount, description: transaction.description, transactionDate: transaction.transactionDate, user: user };
 }

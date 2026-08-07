@@ -16,7 +16,7 @@ export interface ListTransactionsParams {
 export interface TransactionRepository {
     getTransactionById(transactionId: string): Promise<UserTransaction | null>;
     listTransactions(params: ListTransactionsParams): Promise<Paginated<UserTransaction>>;
-    createTransactionForUser(userId: string, transactionData: Partial<UserTransaction>): Promise<UserTransaction>;
+    createTransactionForUser(transactionData: Partial<UserTransaction>): Promise<UserTransaction>;
     updateTransactionForUser(userId: string, transactionId: string, transactionData: Partial<UserTransaction>): Promise<UserTransaction>;
     deleteTransactionForUser(userId: string, transactionId: string): Promise<void>;
 }

@@ -2,12 +2,14 @@ import { AuthGuard } from "@/ui/components/dashboard/AuthGuard";
 import { DashboardFooter } from "@/ui/components/dashboard/DashboardFooter";
 import { DashboardHeader } from "@/ui/components/dashboard/DashboardHeader";
 import { FeatureNav } from "@/ui/components/dashboard/FeatureNav";
+import { TransactionProvider } from "@/ui/context/TransactionContext";
 
 interface Props {
     children: React.ReactNode;
+    createTransaction: React.ReactNode;
 }
 
-export default function LayoutPanel({ children }: Props) {
+export default function LayoutPanel({ children, createTransaction }: Props) {
     return (
         <AuthGuard>
             <div className="flex min-h-screen flex-col">
@@ -17,7 +19,10 @@ export default function LayoutPanel({ children }: Props) {
                         <FeatureNav />
                     </aside>
                     <main className="flex flex-1 flex-col bg-zinc-50 p-6">
-                        {children}
+                        <TransactionProvider>
+                            {children}
+                            {createTransaction}
+                        </TransactionProvider>
                     </main>
                 </div>
                 <DashboardFooter />
