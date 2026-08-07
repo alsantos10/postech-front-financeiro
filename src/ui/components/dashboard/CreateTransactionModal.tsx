@@ -48,7 +48,6 @@ export function CreateTransactionModal({
     async function onSubmit(data: TransactionFormData) {
         try {
             setError(null);
-            console.log(user);
             await createTransaction(data.description, data.amount, data.type, user as User);
             notify();
             reset();

@@ -29,14 +29,12 @@ export async function fetchUsers(filters: IListDatagridFilters): Promise<Paginat
     const allUsers: JsonUser[] = Array.isArray(body) ? body : body.value || [];
     
     const normalizedTerm = term?.trim().toLowerCase();
-    console.log("Aqui", normalizedTerm, allUsers);
     const filtered = normalizedTerm ?
     allUsers.filter(
         (user) => 
                 user.name?.toLowerCase().includes(normalizedTerm) || user.email?.toLowerCase().includes(normalizedTerm)
         ) : allUsers;
 
-    console.log("Aqui", filtered, allUsers);
     const sorted = [...filtered].sort((a, b) => {
         const valueA = String(a[sort as keyof JsonUser] ?? "").toLowerCase();
         const valueB = String(b[sort as keyof JsonUser] ?? "").toLowerCase();

@@ -1,21 +1,18 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
-import Modal from "../shared/Modal";
+import Modal from "@ui/modal";
 import { Input } from "../shared/Input";
 import Button from "../shared/Button";
-import { ForgotPasswordFormData, forgotPasswordSchema } from "../../schemas/forgotPasswordSchema";
 import { useAuth } from "@/ui/context/AuthContext";
 import { RegisterFormData, registerSchema } from "@/ui/schemas/registerSchema";
 
 interface RegisterModalProps {
-    isOpen: boolean;
     onClose: () => void;
     onOpenLogin: () => void;
 }
 
 export function RegisterModal({
-    isOpen, 
     onClose,
     onOpenLogin
 }: RegisterModalProps) {
@@ -49,7 +46,7 @@ export function RegisterModal({
     }
 
     return (
-        <Modal isOpen={isOpen} onClose={onClose} title="Cadastro">
+        <Modal onClose={onClose} title="Cadastro">
             <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-4">
                 <Input 
                     label="Nome" 

@@ -24,8 +24,12 @@ export const metadata: Metadata = {
 };
 
 export default function RootLayout({
-  children, auth
-}: Readonly<{children: React.ReactNode; auth: React.ReactNode}>) {
+  children, auth, user
+}: Readonly<{
+  children: React.ReactNode;
+  auth: React.ReactNode;
+  user: React.ReactNode;
+}>) {
   return (
     <html
       lang="en"
@@ -35,6 +39,7 @@ export default function RootLayout({
           <AuthProvider>
             {children}
             {auth}
+            {user}
           </AuthProvider>
       </body>
     </html>

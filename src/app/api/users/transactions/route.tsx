@@ -5,7 +5,6 @@ import { getSessionCookie } from "@/infra/cookies/CookieTokenStorage";
 import { findUserByEmail } from "@/infra/api/JsonAuthService";
 
 export async function GET(request: NextRequest) {
-    // console.log("GET /api/users", request.nextUrl.toString());
     try {
         const { searchParams } = request.nextUrl
         

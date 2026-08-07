@@ -17,6 +17,12 @@
       "email": "ze@mane.com",
       "password": "123456",
       "id": "L6HYCWwTlGY"
+    },
+    {
+      "name": "Fulano",
+      "email": "fulano@email.com",
+      "password": "123456",
+      "id": "IJB9F23ofw4"
     }
   ],
   "transactions": [
@@ -91,6 +97,14 @@
       "transactionDate": "2026-08-07T15:34:06.353Z",
       "userId": "L6HYCWwTlGY",
       "id": "ZcFs-z09Eds"
+    },
+    {
+      "description": "sadasd",
+      "amount": 200,
+      "type": "DEPOSITO",
+      "transactionDate": "2026-08-07T19:47:20.897Z",
+      "userId": "IJB9F23ofw4",
+      "id": "abDRvQSi0eQ"
     }
   ],
   "$schema": "./node_modules/json-server/schema.json"

@@ -42,11 +42,11 @@ export default function PagesLayout({
           registerModal.close();
           loginModal.open();
         }} />
-      <RegisterModal isOpen={registerModal.isOpen} onClose={registerModal.open}
+      {/* <RegisterModal isOpen={registerModal.isOpen} onClose={registerModal.open}
         onOpenLogin={() => {
           registerModal.close();
           loginModal.open();
-        }} />
+        }} /> */}
     </div>
   );
 }

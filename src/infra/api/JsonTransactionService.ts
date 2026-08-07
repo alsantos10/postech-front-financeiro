@@ -40,7 +40,6 @@ export async function fetchTransactions(filters: IListTransactionsDatagridFilter
             .map(transaction => ({ ...transaction }));
 
         const normalizedTerm = term?.trim().toLowerCase();
-        console.log("Aqui", normalizedTerm, userTransactions);
     const filtered = normalizedTerm ?
     userTransactions.filter(
         (transaction) => 
