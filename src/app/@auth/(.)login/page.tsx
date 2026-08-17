@@ -1,13 +1,12 @@
 'use client'
 
+import { redirect } from "next/navigation";
 import { LoginModal} from '@/ui/components/public/LoginModal';
 import { useModal } from "@/ui/hooks/useModal";
 
 export default function AuthModal() {
 
   const loginModal = useModal();
-  const forgotPasswordModal = useModal();
-  const registerModal = useModal();
 
     return (
         <>
@@ -15,11 +14,7 @@ export default function AuthModal() {
             onClose={loginModal.close}
             onOpenForgotPassword={() => {
                 loginModal.close();
-                forgotPasswordModal.open();
-            }}
-            onOpenRegister={() => {
-                loginModal.close();
-                registerModal.open();
+                redirect("/forgot-password")
             }} />
         </>
     );

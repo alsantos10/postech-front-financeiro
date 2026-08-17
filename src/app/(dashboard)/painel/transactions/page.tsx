@@ -1,10 +1,10 @@
 "use client";
 
 import { DataGridColumn } from "@/core/entities/DataGrid";
-import { Transaction, TypeTransaction } from "@/core/entities/Transactions";
-import { User } from "@/core/entities/User";
+import { Transaction } from "@/core/entities/Transactions";
 import { DataGrid } from "@/ui/components/shared/DataGrid";
 import { useUserTransactions } from "@/ui/hooks/useUserTransactions";
+import Link from "next/link";
 
 export default function TransactionsPage() {
     const {
@@ -21,12 +21,35 @@ export default function TransactionsPage() {
       {key: "type", header: "Tipo", sortable: true},
       {key: "transactionDate", header: "Data", sortable: true,
         render: (item) => new Date(item.transactionDate).toLocaleDateString("pt-BR")
-      }
+      },
+      {
+        key: "actions", header: "Ações", sortable: false,
+        render: (transaction) => {
+          return (
+            <div className="flex gap-2">
+            
+              <Link href={`/painel/transactions/${transaction.id}`} className="bg-slate-800 text-white px-2 py-1 rounded text-xs hover:bg-slate-700 transition">
+                Editar
+              </Link>
+
+
+
+              <button
+                onClick={() => handleDelete(transaction.id)}
+                className="bg-rose-600 text-white px-2 py-1 rounded text-xs hover:bg-rose-500 transition"
+              >
+                Excluir
+              </button>
+            </div>
+          )
+        }
+      },
     ];
     
     // Regras de negócio locais de ação disparadas pelos botões injetados
-    const handleEdit = (user: Transaction) => {
-        alert(`Modo edição ativado para o ID: ${user.description}`)
+    const handleEdit = (t: Transaction) => {
+        alert(`Modo edição ativado para o ID: ${t.description}`)
+        
     }
     
     const handleDelete = (id: string) => {

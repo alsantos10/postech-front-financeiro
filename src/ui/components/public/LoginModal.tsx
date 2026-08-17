@@ -12,13 +12,11 @@ import { toast } from "react-toastify";
 interface LoginModalProps {
     onClose: () => void;
     onOpenForgotPassword: () => void;
-    onOpenRegister: () => void;
 }
 
 export function LoginModal({
     onClose,
-    onOpenForgotPassword,
-    onOpenRegister
+    onOpenForgotPassword
 }: LoginModalProps) {
     const { login } = useAuth();
     const [ error, setError ] = useState<string | null>(null);
@@ -47,7 +45,7 @@ export function LoginModal({
     }
 
     return (
-        <Modal onClose={onClose} title="Login">
+        <Modal onClose={onClose}>
             <div className="flex flex-col items-center p-4">
                 <Image src="/IlustraCadastro.svg" alt="Ilustração de login" width={220} height={220} preload={true} />
             </div>
@@ -69,44 +67,23 @@ export function LoginModal({
                     error={errors.password?.message} />
 
                 {error && <span className="mt-2 text-sm text-red-600">{error}</span>}
-
-                <div className="flex justify-center mt-4 px-4 py-3 sm:flex sm:flex-row-reverse sm:px-6">
-                    <Button type="submit" disabled={isSubmitting} className="p-4 py-3 text-sm font-semibold min-w-[144] rounded-md bg-custom-green text-white shadow-sm hover:bg-custom-green-500 focus:outline-none focus:ring-2 focus:ring-custom-green-500 focus:ring-offset-2 sm:ml-3 sm:w-auto disabled:bg-custom-red-900 cursor-pointer">
-                        {isSubmitting ? "Entrando..." : "Logar"}
-                    </Button>
-                </div>
-
-                <div className="flex items-center justify-between">
-                    <div className="text-sm">
-                        <a href="#" className="font-medium text-custom-green hover:text-custom-green-500">
-                            Esqueceu a senha?
-                        </a>
-                    </div>
-                    <div className="flex items-center justify-between">
-                        <div className="text-sm">
-                            <a href="#" className="font-medium text-custom-green hover:text-custom-green-500">
-                                Esqueceu a senha?
-                            </a>
-                        </div>
-                    </div>
+                    
+                <div className="flex flex-row">
                     <button
                         type="button"
                         onClick={() => {
                             onClose();
                             onOpenForgotPassword()
                         }}
-                        className="text-zinc-600 hover:text-zinc-900 dark:text-zinc-400 dark:hober:text-zinc-200">
+                        className="font-medium cursor-pointer text-custom-green underline hover:text-custom-green-500">
                         Esqueci a senha
                     </button>
-                    <button
-                        type="button"
-                        onClick={() => {
-                            onClose();
-                            onOpenRegister()
-                        }}
-                        className="text-zinc-600 hover:text-zinc-900 dark:text-zinc-400 dark:hober:text-zinc-200">
-                        Cadastrar
-                    </button>
+                </div>
+
+                <div className="flex justify-center mt-4 px-4 py-3 sm:flex sm:flex-row-reverse sm:px-6">
+                    <Button type="submit" disabled={isSubmitting} className="p-4 py-3 text-sm font-semibold min-w-[144] rounded-md bg-custom-green text-white shadow-sm hover:bg-custom-green-500 focus:outline-none focus:ring-2 focus:ring-custom-green-500 focus:ring-offset-2 sm:ml-3 sm:w-auto disabled:bg-custom-red-900 cursor-pointer">
+                        {isSubmitting ? "Entrando..." : "Acessar"}
+                    </Button>
                 </div>
             </form>
         </Modal>

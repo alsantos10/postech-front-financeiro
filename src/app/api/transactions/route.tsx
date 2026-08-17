@@ -1,6 +1,6 @@
 import { OrderType } from "@/core/entities/DataGrid";
 import { findUserByEmail } from "@/infra/api/JsonAuthService";
-import { fetchTransactions } from "@/infra/api/JsonTransactionService";
+import { createTransaction, fetchTransactions, updateTransaction } from "@/infra/api/JsonTransactionService";
 import { getSessionCookie } from "@/infra/cookies/CookieTokenStorage";
 import { NextRequest, NextResponse } from "next/server";
 
@@ -35,5 +35,49 @@ export async function GET(request: NextRequest) {
         return NextResponse.json(response);
     } catch (error) {
         return NextResponse.json({message: "Erro ao listar transações"}, {status: 500});
+    }
+}
+
+export async function POST(request: NextRequest) {
+    try {
+        const {amount, description, type} = await request.json();
+        
+        if (!amount || !description || !type) {
+            return NextResponse.json({message: "Todos os campos são obrigatórios"}, {status: 400});
+        }
+        const email = await getSessionCookie();
+        if (!email) {
+            return NextResponse.json({message: "Usuário não autenticado"}, {status: 401});
+        }
+        const user = await findUserByEmail(email);
+        if (!user) {
+            return NextResponse.json({message: "Usuário não encontrado"}, {status: 404});
+        }
+        const transaction = await createTransaction(description, amount, type, user);
+        return NextResponse.json(transaction, {status: 201});
+    } catch (error) {
+        return NextResponse.json({message: "Erro ao criar transação"}, {status: 500});
+    }
+}
+
+export async function PATCH(request: NextRequest) {
+    try {
+        const {id, amount, description, type} = await request.json();
+        
+        if (!id || (id && (!amount || !description || !type))) {
+            return NextResponse.json({message: "Todos os campos são obrigatórios"}, {status: 400});
+        }
+        const email = await getSessionCookie();
+        if (!email) {
+            return NextResponse.json({message: "Usuário não autenticado"}, {status: 401});
+        }
+        const user = await findUserByEmail(email);
+        if (!user) {
+            return NextResponse.json({message: "Usuário não encontrado"}, {status: 404});
+        }
+        const transaction = await updateTransaction(id, description, amount, type, user);
+        return NextResponse.json(transaction, {status: 201});
+    } catch (error) {
+        return NextResponse.json({message: "Erro ao atualizar transação"}, {status: 500});
     }
 }

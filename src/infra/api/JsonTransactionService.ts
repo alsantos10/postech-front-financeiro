@@ -38,8 +38,8 @@ export async function fetchTransactions(filters: IListTransactionsDatagridFilter
         const userTransactions: JsonTransaction[] = allTransactions
             .filter(t => t.userId === user.id)
             .map(transaction => ({ ...transaction }));
-
-        const normalizedTerm = term?.trim().toLowerCase();
+            const normalizedTerm = term?.trim().toLowerCase();
+            console.log("Aqui", normalizedTerm, userTransactions);
     const filtered = normalizedTerm ?
     userTransactions.filter(
         (transaction) => 
@@ -73,6 +73,15 @@ export async function findTransactionsByUserId(userId: string): Promise<JsonTran
     return transactions || null;
 }
 
+export async function findTransactionId(transactionId: string | null): Promise<JsonTransaction | null> {
+    const response = await fetch(`${JSON_SERVER_URL}/transactions/${encodeURIComponent(transactionId || "")}`);
+    if (!response.ok) {
+        throw new TransactionError("Erro ao consultar transação");
+    }
+    const transaction: JsonTransaction = await response.json();
+    return transaction || null;
+}
+
 export async function createTransaction(description: string, amount: number, type: TypeTransaction, user: User): Promise<Transaction> {
     const transactionDate = new Date();
     const response = await fetch(`${JSON_SERVER_URL}/transactions`, {
@@ -85,6 +94,23 @@ export async function createTransaction(description: string, amount: number, typ
 
     if(!response.ok) {
         throw new TransactionError("Erro ao criar transação");
+    }
+    const transaction: JsonTransaction = await response.json();
+    return { id: transaction.id, type: transaction.type, amount: transaction.amount, description: transaction.description, transactionDate: transaction.transactionDate, user: user };
+}
+
+export async function updateTransaction(id: string, description: string, amount: number, type: TypeTransaction, user: User): Promise<Transaction> {
+    const transactionDate = new Date();
+    const response = await fetch(`${JSON_SERVER_URL}/transactions/${id}`, {
+        method: 'PATCH',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({description, amount, type, transactionDate}),
+    });
+
+    if(!response.ok) {
+        throw new TransactionError("Erro ao atualizar transação");
     }
     const transaction: JsonTransaction = await response.json();
     return { id: transaction.id, type: transaction.type, amount: transaction.amount, description: transaction.description, transactionDate: transaction.transactionDate, user: user };

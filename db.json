@@ -100,11 +100,27 @@
     },
     {
       "description": "sadasd",
-      "amount": 200,
-      "type": "DEPOSITO",
-      "transactionDate": "2026-08-07T19:47:20.897Z",
+      "amount": 454,
+      "type": "PAGAMENTO",
+      "transactionDate": "2026-08-10T04:50:19.216Z",
       "userId": "IJB9F23ofw4",
       "id": "abDRvQSi0eQ"
+    },
+    {
+      "description": "Agora Vai",
+      "amount": 444,
+      "type": "DEPOSITO",
+      "transactionDate": "2026-08-08T07:19:20.137Z",
+      "userId": "L6HYCWwTlGY",
+      "id": "ikqzZGpsWB0"
+    },
+    {
+      "description": "ewrew",
+      "amount": 222,
+      "type": "DEPOSITO",
+      "transactionDate": "2026-08-10T04:52:00.470Z",
+      "userId": "IJB9F23ofw4",
+      "id": "UYecLA4ei1g"
     }
   ],
   "$schema": "./node_modules/json-server/schema.json"

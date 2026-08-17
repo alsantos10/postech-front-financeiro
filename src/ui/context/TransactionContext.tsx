@@ -12,6 +12,7 @@ interface TransactionContextData {
     isAuthenticated: boolean;
     loading: boolean;
     createTransaction: (description: string, amount: number, type: TypeTransaction) => Promise<void>;
+    updateTransaction: (id: string, description: string, amount: number, type: TypeTransaction) => Promise<void>;
 }
 
 const TransactionContext = createContext<TransactionContextData | undefined>(undefined);
@@ -39,13 +40,18 @@ export function TransactionProvider({children}: {children: ReactNode}) {
         await transactionRepository.createTransactionForUser(transaction);
     }, []);
 
+     const updateTransaction = useCallback(async (transactionId: string, description: string, amount: number, type: TypeTransaction) => {
+        await transactionRepository.updateTransactionForUser(transactionId, { description, amount, type });
+    }, []);
+
     return (
         <TransactionContext.Provider
             value={{
                 user, 
                 isAuthenticated: !!user,
                 loading,
-                createTransaction
+                createTransaction,
+                updateTransaction
             }}>
             {children}
         </TransactionContext.Provider>

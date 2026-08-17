@@ -2,7 +2,6 @@ import { Paginated } from "@/core/entities/Paginated";
 import { UserTransaction } from "@/core/entities/UserTransactions";
 import { TransactionError } from "@/core/errors/TransactionError";
 import { ListTransactionsParams, TransactionRepository } from "@/core/ports/TransactionRepository";
-import { useAuth } from '@/ui/context/AuthContext';
 
 export class NextTransactionRepository implements TransactionRepository {
     getTransactionById(transactionId: string): Promise<UserTransaction | null> {
@@ -43,8 +42,17 @@ export class NextTransactionRepository implements TransactionRepository {
         return response.json();
     }
 
-    updateTransactionForUser(userId: string, transactionId: string, transactionData: Partial<UserTransaction>): Promise<UserTransaction> {
-        throw new Error("Method not implemented.");
+    async updateTransactionForUser(transactionId: string, transactionData: Partial<UserTransaction>): Promise<UserTransaction> {
+        const response = await fetch(`/api/transactions/${transactionId}`, {
+            method: "PATCH",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ ...transactionData })
+        });
+        if (!response.ok) {
+            const error = await response.json();
+            throw new TransactionError(error.message || "Erro ao criar transação");
+        }
+        return response.json();
     }
 
     deleteTransactionForUser(userId: string, transactionId: string): Promise<void> {
