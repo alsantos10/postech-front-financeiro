@@ -24,7 +24,7 @@
       "@models/*": ["./src/models/*"],
       "@services/*": ["./src/app/services/*"],
       "@api/*": ["./src/app/api/*"],
-      "@shared/*": ["./src/app/(shared)/*"]
+      "@shared/*": ["./src/shared/*"]
     }
   },
   "include": [

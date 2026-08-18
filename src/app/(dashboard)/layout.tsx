@@ -3,7 +3,7 @@ import { DashboardFooter } from "@/ui/components/dashboard/DashboardFooter";
 import { DashboardHeader } from "@/ui/components/dashboard/DashboardHeader";
 import { FeatureNav } from "@/ui/components/dashboard/FeatureNav";
 import { TransactionProvider } from "@/ui/context/TransactionContext";
-import { formattedValue } from "@shared/utils";
+import { formattedValue } from "@/shared/formatting/currency";
 
 interface Props {
     children: React.ReactNode;

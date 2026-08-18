@@ -2,7 +2,7 @@
 
 import { Transaction } from '@/core/entities/Transactions';
 import { useUserTransactions } from "@/ui/hooks/useUserTransactions";
-import { formattedValue } from "@shared/utils";
+import { formattedValue } from "@/shared/formatting/currency";
 import { useAuth } from '@/ui/hooks/useAuth';
 
 export default function PainelPage() {
