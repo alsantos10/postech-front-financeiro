@@ -19,7 +19,7 @@ export const InputCheckbox = forwardRef<HTMLInputElement, InputProps>(
                         {label}
                     </span>
                 </label>
-                {error && <span className="mt-2 text-sm text-red-600">{error}</span>}
+                {error && <span className="mt-1 text-xs text-red-600">{error}</span>}
             </div>
         )
     }

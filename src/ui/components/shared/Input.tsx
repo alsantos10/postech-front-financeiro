@@ -16,10 +16,10 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
                 )}
                 <input 
                     ref={ref}
-                    className={`mt-1 block w-full rounded-md border border-gray-300 bg-white px-3 py-2 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm ${className}`}
+                    className={`mt-1 block w-full rounded-md border border-gray-300 bg-white px-3 py-2 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm ${className} ${error && 'border-red-600'}`}
                     {...props}
                 />
-                {error && <span className="mt-2 text-sm text-red-600">{error}</span>}
+                {error && <span className="mt-1 text-xs text-red-600">{error}</span>}
             </div>
         )
     }
