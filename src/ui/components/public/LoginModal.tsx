@@ -25,10 +25,11 @@ export function LoginModal({
     const {
         register,
         handleSubmit,
-        formState: {errors, isSubmitting},
+        formState: {errors, isValid, isSubmitting},
         reset,
     } = useForm<LoginFormData>({
         resolver: zodResolver(loginSchema),
+        mode: 'onChange'
     });
 
     async function onSubmit(data: LoginFormData) {
@@ -81,7 +82,7 @@ export function LoginModal({
                 </div>
 
                 <div className="flex justify-center mt-4 px-4 py-3 sm:flex sm:flex-row-reverse sm:px-6">
-                    <Button type="submit" disabled={isSubmitting} className="p-4 py-3 text-sm font-semibold min-w-[144] rounded-md bg-custom-green text-white shadow-sm hover:bg-custom-green-500 focus:outline-none focus:ring-2 focus:ring-custom-green-500 focus:ring-offset-2 sm:ml-3 sm:w-auto disabled:bg-custom-red-900 cursor-pointer">
+                    <Button type="submit" disabled={isSubmitting || !isValid} className="p-4 py-3 text-sm font-semibold min-w-[144] rounded-md bg-custom-green text-white shadow-sm hover:bg-custom-green-500 focus:outline-none focus:ring-2 focus:ring-custom-green-500 focus:ring-offset-2 sm:ml-3 sm:w-auto disabled:bg-custom-red-900 cursor-pointer">
                         {isSubmitting ? "Entrando..." : "Acessar"}
                     </Button>
                 </div>
