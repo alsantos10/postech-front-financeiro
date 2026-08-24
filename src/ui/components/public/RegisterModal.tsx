@@ -6,6 +6,8 @@ import { Input } from "../shared/Input";
 import Button from "../shared/Button";
 import { useAuth } from "@/ui/context/AuthContext";
 import { RegisterFormData, registerSchema } from "@/ui/schemas/registerSchema";
+import Image from "next/image";
+import { InputCheckbox } from "../shared/InputCheckbox";
 
 interface RegisterModalProps {
     onClose: () => void;
@@ -23,10 +25,11 @@ export function RegisterModal({
     const {
         register,
         handleSubmit,
-        formState: {errors, isSubmitting},
+        formState: {errors, isValid, isSubmitting},
         reset,
     } = useForm<RegisterFormData>({
         resolver: zodResolver(registerSchema),
+        mode: 'onChange'
     });
 
     async function onSubmit(data: RegisterFormData) {
@@ -46,7 +49,15 @@ export function RegisterModal({
     }
 
     return (
-        <Modal onClose={onClose} title="Cadastro">
+        <Modal onClose={onClose}>
+            <div className="flex flex-col items-center p-4">
+                <Image src="/IlustraCadastro.svg" alt="Ilustração de Cadastro" width={220} height={220} preload={true} />
+            </div>
+
+            <h3 className="text-lg font-medium text-gray-900">
+                Preencha os campos abaixo para criar sua conta corrente!
+            </h3>
+            
             <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-4">
                 <Input 
                     label="Nome" 
@@ -67,12 +78,21 @@ export function RegisterModal({
                     {...register("password")}
                     error={errors.password?.message} />
 
+                <InputCheckbox 
+                    label="Li e estou ciente quanto às condições de tratamento dos meus dados conforme descrito na Política de Privacidade do banco." 
+                    type="checkbox" 
+                    {...register("terms")}
+                    error={errors.terms?.message}/>
+
+                
                 {success && <span className="text-sm text-green-600">{success}</span>}
                 {error && <span className="text-sm text-red-500">{error}</span>}
 
-                <Button type="submit" disabled={isSubmitting}>
-                    {isSubmitting ? "Cadastrando..." : "Cadastrar"}
-                </Button>
+                <div className="flex justify-center mt-4 px-4 py-3 sm:flex sm:flex-row-reverse sm:px-6">
+                    <Button type="submit" disabled={isSubmitting || !isValid}>
+                        {isSubmitting ? "Cadastrando..." : "Cadastrar"}
+                    </Button>
+                </div>
             </form>
         </Modal>
     )

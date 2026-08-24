@@ -51,14 +51,14 @@ export default function Modal({ isOpen, onClose, title, children }: ModalProps) 
             className='fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4'
             role="dialog"
             aria-modal="true">
-                <div className='w-full max-w-md rounded-lg bg-white p-6 shadow-xl dark:bg-zinc-900'>
+                <div className='w-full max-w-md rounded-lg bg-white p-6 shadow-xl'>
                     {title && (
                         <div className='mb-4 flex items-center justify-between'>
-                            <h2 className='text-lg font-semibold text-zinc-900 dark:text-zinc-50'>{title}</h2>
+                            <h2 className='text-lg font-semibold text-zinc-900'>{title}</h2>
                             <button
                                 onClick={onClose}
                                 aria-label='Fechar'
-                                className='text-zinc-500 hover:text-zinc-700 dark:text-zinc-400 dark:hover:text-zinc-200'>X</button>
+                                className='text-zinc-500 hover:text-zinc-700'>X</button>
                         </div>
                     )}
                     {children}
