@@ -38,20 +38,7 @@ export default function Home() {
           <Banner />
         </div>
 
-        <div className="mt-4 flex flex-row gap-3 px-6 sm:hidden md:hidden">
-          <Button variant="primary" size="md" className="flex-1 bg-black text-white hover:bg-gray-900">
-            Abrir conta
-          </Button>
-          <Button
-            variant="secondary"
-            size="md"
-            className="flex-1 border-black text-black hover:bg-black/5"
-          >
-            Já tenho conta
-          </Button>
-        </div>
-
-        <section className="mt-2 px-6 py-10 md:px-10">
+        <section className="mt-2 px-6 py-8 md:px-10">
           <div className="mx-auto max-w-6xl">
             <h2 className="mb-8 text-center font-[Inter] text-[25px] font-bold not-italic leading-[120%] tracking-[0%] text-black align-middle">
               Vantagens do nosso banco

@@ -16,7 +16,7 @@ export function Banner() {
           width={420}
           height={320}
           loading="eager"
-          className="mx-auto h-auto w-full max-w-60 object-contain sm:max-w-70 md:h-full md:max-w-105
+          className="mx-auto h-auto w-full object-contain lg:max-w-105 md:h-full
           6"
         />
       </div>

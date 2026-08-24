@@ -36,15 +36,26 @@ export function PublicHeader({onOpenLogin, onOpenRegister}: PublicHeaderProps) {
 
     return (
         <header className='bg-black shadow-2xl'>
-            <div className='mx-auto flex max-w-6xl items-center justify-between px-4 py-4 md:flex-row'>
+            <div className='mx-auto flex max-w-6xl items-center justify-between px-4 py-4 sm:flex-row'>
 
                 {/* Mobile: menu a esqueda */}
-                <button className='md:hidden text-white cursor-pointer' onClick={() => setIsOpen(!isOpen)}>
+                <button className='sm:hidden text-white cursor-pointer' onClick={() => setIsOpen(!isOpen)}>
                     {isOpen ? <X size={28} /> : <Menu size={28} />}
                 </button>
 
                 {/* Logo: mobile a direita, desktop a esquerda */}
-                <Link href="/" className='ml-auto md:ml-0'>
+                <Link href="/" className='hidden sm:flex md:flex lg:hidden'>
+                    <img
+                        src="/logo_icon.png"
+                        alt="Bytebank"
+                        className="h-8 w-8"
+                        width={146}
+                        height={32}
+                    />
+                </Link>
+
+                {/* Logo: mobile a direita, desktop a esquerda */}
+                <Link href="/" className='sm:hidden lg:flex'>
                     <img
                         src="/Logo.svg"
                         alt="Bytebank"
@@ -55,7 +66,7 @@ export function PublicHeader({onOpenLogin, onOpenRegister}: PublicHeaderProps) {
                 </Link>
                 
                 {/* Navegação desktop */}
-                <nav className='hidden md:flex items-center gap-6'>
+                <nav className='hidden sm:flex items-center gap-6'>
                     <Link
                         href="/about"
                         className="rounded-none px-0 py-0 text-[18px] font-semibold text-custom-green hover:text-custom-green-500">
@@ -69,7 +80,7 @@ export function PublicHeader({onOpenLogin, onOpenRegister}: PublicHeaderProps) {
                 </nav>
 
                 {/* Botoes de autenticação */}
-                <div className='hidden md:flex items-center gap-2'>
+                <div className='hidden sm:flex items-center gap-2'>
                     {isAuthenticated ? (
                         <Button variant='primary' size='md' onClick={goToPanel}>
                             Painel de Controle
@@ -97,7 +108,7 @@ export function PublicHeader({onOpenLogin, onOpenRegister}: PublicHeaderProps) {
 
             {/* Menu Mobile expansivel */}
             <div className={`
-                md:hidden fixed top-0 left-0 h-full w-64 bg-black shadow-lg z-50
+                sm:hidden hover fixed top-0 left-0 h-full w-64 bg-black shadow-lg z-50
                 transform transition-all duration-300 ease-in-out
                 ${isOpen ? "translate-x-0 opacity-100" : "-translate-x-full opacity-0"}
                 `}>
