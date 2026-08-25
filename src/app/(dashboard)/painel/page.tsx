@@ -8,13 +8,9 @@ import { FeatureNav } from "@/ui/components/dashboard/FeatureNav";
 
 export default function PainelPage() {
 
-    const {
-            data, loading, error, page, limit, sort, order, term, 
-            handlePageChange, handleLimitChange, handleSort, handleSearch
-        } = useUserTransactions();
+
 
     const { user } = useAuth();
-    const transactions = data?.items;
     
     // Regras de negócio locais de ação disparadas pelos botões injetados
     const handleEdit = (t: Transaction) => {
@@ -27,9 +23,9 @@ export default function PainelPage() {
 
     return (
         <div className="flex flex-row sm:flex-col sm:gap-2">
-            <aside className="hidden w-84 border-r border-zinc-200 bg-white md:block">
+            {/* <aside className="hidden w-84 border-r border-zinc-200 bg-white md:block">
                 <FeatureNav />
-            </aside>
+            </aside> */}
 
             <main className="flex flex-1 flex-col bg-zinc-50 p-6">
                 <div>
@@ -40,15 +36,6 @@ export default function PainelPage() {
                 </div>
             </main>
 
-            <section className="w-84 border-l border-zinc-50 bg-white">
-                <CardTransactionGrid 
-                    title='Diretito'
-                    subtitle='Subtitulo bonitão'
-                    transactions={data?.items || []}
-                    loading={loading}
-                    />
-            </section>
-            {/* {error && <span className='text-sm text-red-500'>{error}</span>} */}
         </div>
     );
 }

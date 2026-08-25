@@ -3,6 +3,7 @@ import { DashboardFooter } from "@/ui/components/dashboard/DashboardFooter";
 import { DashboardHeader } from "@/ui/components/dashboard/DashboardHeader";
 import { TransactionProvider } from "@/ui/context/TransactionContext";
 import { formattedValue } from "@/shared/formatting/currency";
+import MainDashboard from "@/ui/components/dashboard/MainDashboard";
 
 interface Props {
     children: React.ReactNode;
@@ -34,19 +35,21 @@ export default function LayoutPanel({
     
     return (
         <AuthGuard>
-            <div className="flex min-h-screen flex-col">
-                <DashboardHeader />
-                <div className="flex flex-1 flex-row xl:flex-col">
+            {/* <div className="flex min-h-screen flex-col"> */}
+                {/* <DashboardHeader /> */}
+                {/* <div className="flex flex-1 flex-row xl:flex-col"> */}
                     
                     <TransactionProvider>
-                        {children}
-                        {createTransaction}
-                        {updateTransaction}
+                        <MainDashboard>
+                            {children}
+                            {createTransaction}
+                            {updateTransaction}
+                        </MainDashboard>
                     </TransactionProvider>
                    
-                </div>
+                {/* </div> */}
                 <DashboardFooter />
-            </div>
+            {/* </div> */}
         </AuthGuard>
     )
 }

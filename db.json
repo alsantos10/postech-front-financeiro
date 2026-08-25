@@ -23,6 +23,18 @@
       "email": "fulano@email.com",
       "password": "123456",
       "id": "IJB9F23ofw4"
+    },
+    {
+      "name": "Fulano",
+      "email": "fulado@detal.com",
+      "password": "123456",
+      "id": "XidQTZrs0Jo"
+    },
+    {
+      "name": "indiana@jones.com",
+      "email": "indiana@jones.com",
+      "password": "123456",
+      "id": "rmEMP1_CIgA"
     }
   ],
   "transactions": [
@@ -121,6 +133,14 @@
       "transactionDate": "2026-08-10T04:52:00.470Z",
       "userId": "IJB9F23ofw4",
       "id": "UYecLA4ei1g"
+    },
+    {
+      "description": "teste",
+      "amount": 111,
+      "type": "DEPOSITO",
+      "transactionDate": "2026-08-25T01:21:35.677Z",
+      "userId": "rmEMP1_CIgA",
+      "id": "AHvAGhaL3m0"
     }
   ],
   "$schema": "./node_modules/json-server/schema.json"
