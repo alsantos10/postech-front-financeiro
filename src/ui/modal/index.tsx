@@ -35,9 +35,9 @@ export default function Modal({ onClose, title, children }: ModalProps) {
             >
               <div className="px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
                 <div>
-                  <div className="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
+                  <div className="mt-3 sm:mt-0 sm:ml-4 sm:text-left">
                     { title ? (
-                      <DialogTitle as="h3" className="text-base font-semibold text-gray-900">
+                      <DialogTitle as="h3" className="text-base text-center font-semibold text-gray-900">
                         {title}
                         <button onClick={close}
                           className="absolute top-4 right-4 z-10 rounded-full cursor-pointer p-2 transition-colors hover:bg-black/10">

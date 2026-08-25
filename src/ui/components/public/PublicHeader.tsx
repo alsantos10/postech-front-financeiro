@@ -123,10 +123,10 @@ export function PublicHeader({onOpenLogin, onOpenRegister}: PublicHeaderProps) {
 
                 {/* Links e Botoes */}
                 <div className='px-6 py-8 space-y-6'>
-                    <button onClick={() => handleNav("/about")} className="block text-lg text-white hover:text-custom-green text-left w-full">
+                    <button onClick={() => handleNav("/about")} className="block text-lg text-white cursor-pointer hover:text-custom-green text-left w-full">
                         Sobre
                     </button>
-                    <button onClick={() => handleNav("/services")} className="block text-lg text-white hover:text-custom-green text-left w-full">
+                    <button onClick={() => handleNav("/services")} className="block text-lg text-white cursor-pointer hover:text-custom-green text-left w-full">
                         Serviços
                     </button>
                 {isAuthenticated ? (

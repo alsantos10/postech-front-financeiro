@@ -8,6 +8,7 @@ import { useAuth } from "@/ui/context/AuthContext";
 import { RegisterFormData, registerSchema } from "@/ui/schemas/registerSchema";
 import Image from "next/image";
 import { InputCheckbox } from "../shared/InputCheckbox";
+import { Primary } from "@/stories/Button.stories";
 
 interface RegisterModalProps {
     onClose: () => void;
@@ -42,6 +43,7 @@ export function RegisterModal({
             setTimeout(() => {
                 onClose();
                 onOpenLogin();
+                setSuccess(null);
             }, 1500)
         } catch(err) {
             setError(err instanceof Error ? err.message : "Erro ao cadastrar");
@@ -89,7 +91,7 @@ export function RegisterModal({
                 {error && <span className="text-sm text-red-500">{error}</span>}
 
                 <div className="flex justify-center mt-4 px-4 py-3 sm:flex sm:flex-row-reverse sm:px-6">
-                    <Button type="submit" disabled={isSubmitting || !isValid}>
+                    <Button type="submit" disabled={isSubmitting || !isValid} variant="orange">
                         {isSubmitting ? "Cadastrando..." : "Cadastrar"}
                     </Button>
                 </div>

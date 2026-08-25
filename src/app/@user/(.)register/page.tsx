@@ -2,6 +2,7 @@
 
 import { RegisterModal } from "@/ui/components/public/RegisterModal";
 import { useModal } from "@/ui/hooks/useModal";
+import { redirect } from "next/navigation";
 
 export default function CadastroModal() {
 
@@ -14,7 +15,7 @@ export default function CadastroModal() {
             onClose={registerModal.close}
             onOpenLogin={() => {
                 registerModal.close();
-                loginModal.open();
+                redirect("/login");
             }} />
         </>
     );

@@ -9,6 +9,8 @@
   --custom-gray: #F8F8F8;
   --custom-red: #FF5031;
   --custom-red-500: #ce4129;
+  --custom-orange: #FF5031;
+  --custom-orange-500: #f0482a;
 }
 
 @theme inline {
