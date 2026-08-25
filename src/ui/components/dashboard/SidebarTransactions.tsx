@@ -18,7 +18,7 @@ export function SidebarTransactions() {
   } = useUserTransactions();
 
   return (
-    <aside className="w-full md:w-auto xl:w-[282] items-center xl:min-w-[282] p-4 bg-[#F5F5F5] border-t md:border-t-0 md:border-l border-gray-200 flex flex-col gap-4">
+    <aside className="w-full md:w-auto items-center p-4 bg-[#F5F5F5] border-t md:border-t-0 md:border-l border-gray-200 flex flex-col gap-4">
       
 
       <h2 className="text-2xl font-bold">
