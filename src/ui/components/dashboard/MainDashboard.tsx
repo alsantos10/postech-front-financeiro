@@ -23,7 +23,7 @@ export default function MainDashboard({ children }: { children: React.ReactNode 
         <div>
             <button 
             onClick={() => setMenuAberto(!menuAberto)}
-            className="md:hidden p-2 rounded focus:outline-none hover:bg-gray-100"
+            className="md:hidden p-2 rounded focus:outline-none cursor-pointer text-gray-100 hover:text-gray-900 hover:bg-gray-100"
             aria-label="Menu"
             >
             <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">

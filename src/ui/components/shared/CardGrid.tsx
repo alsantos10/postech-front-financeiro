@@ -1,5 +1,5 @@
 import { Transaction } from "@/core/entities/Transactions"
-import { formattedValue } from "@/shared/formatting/currency";
+import { formatCurrency } from "@/shared/formatting/currency";
 import { convertDate, getDateName } from '@/shared/formatting/convertDate';
 import { capitalize } from "@/shared/formatting/capitalize";
 
@@ -38,7 +38,7 @@ export function CardTransactionGrid({
                                 {capitalize(item.type)}
                             </span>
                             <span className="font-semibold text-[16px] mt-1">
-                                {formattedValue(item.amount)}
+                                {formatCurrency(item.amount)}
                             </span>
                         </div>
 

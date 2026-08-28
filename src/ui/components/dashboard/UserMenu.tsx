@@ -34,7 +34,7 @@ export function UserMenu() {
                     <span className="hidden text-sm font-medium text-white md:block">
                         {user?.name || "Usuário"}
                     </span>
-                    <div className="flex h-8 w-8 items-center justify-center rounded-full text-orange-500 border-2 border-orange">
+                    <div className="flex h-8 w-8 items-center justify-center cursor-pointer rounded-full text-orange-500 border-2 border-orange">
                         <User size={18}/>
                     </div>
             </button>

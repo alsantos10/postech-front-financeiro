@@ -1,41 +1,19 @@
 "use client";
 
-import { Transaction } from '@/core/entities/Transactions';
 import { useUserTransactions } from "@/ui/hooks/useUserTransactions";
 import { useAuth } from '@/ui/hooks/useAuth';
-import { CardTransactionGrid } from '@/ui/components/shared/CardGrid';
-import { FeatureNav } from "@/ui/components/dashboard/FeatureNav";
+import { BalanceCard } from '@/ui/components/dashboard/BalanceCard';
 
 export default function PainelPage() {
 
-
-
     const { user } = useAuth();
+    const { data, loading } = useUserTransactions();
     
-    // Regras de negócio locais de ação disparadas pelos botões injetados
-    const handleEdit = (t: Transaction) => {
-        alert(`Modo edição ativado para o ID: ${t.description}`)
-    }
-    
-    const handleDelete = (id: string) => {
-        alert(`Comando de exclusão enviado para o ID: ${id}`)
-    }
-
     return (
         <div className="flex flex-row sm:flex-col sm:gap-2">
-            {/* <aside className="hidden w-84 border-r border-zinc-200 bg-white md:block">
-                <FeatureNav />
-            </aside> */}
-
             <main className="flex flex-1 flex-col bg-zinc-50 p-6">
-                <div>
-                    <h1 className='text-2x1 font-bold text-zinc-900'>Painel de Controle</h1>
-                    <p className='mt-2 text-zinc-600'>
-                        Bem-vindo, {user?.name || 'Usuário'} ao painel de controle.
-                    </p>
-                </div>
+                <BalanceCard userName={user?.name} balance={data?.account?.balance ?? 0} loading={loading} />
             </main>
-
         </div>
     );
 }

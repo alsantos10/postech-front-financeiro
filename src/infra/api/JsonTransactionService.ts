@@ -1,7 +1,8 @@
 import { IListDatagridFilters, OrderType } from "@/core/entities/DataGrid";
 import { User } from "@/core/entities/User";
+import { TypeTransaction } from "@/core/entities/Transactions";
 import { Paginated } from "@/core/entities/Paginated";
-import { Transaction, TypeTransaction } from "@/core/entities/Transactions";
+import { Transaction } from "@/core/entities/Transactions";
 import { TransactionError } from "@/core/errors/TransactionError";
 
 const JSON_SERVER_URL = process.env.JSON_SERVER_URL || "http://localhost:3001";
@@ -38,6 +39,10 @@ export async function fetchTransactions(filters: IListTransactionsDatagridFilter
         const userTransactions: JsonTransaction[] = allTransactions
             .filter(t => t.userId === user.id)
             .map(transaction => ({ ...transaction }));
+        const balance = userTransactions.reduce((currentBalance, transaction) => {
+            const isCredit = transaction.type === TypeTransaction.DEPOSIT;
+            return currentBalance + (isCredit ? transaction.amount : -transaction.amount);
+        }, 0);
             const normalizedTerm = term?.trim().toLowerCase();
             console.log("Aqui", normalizedTerm, userTransactions);
     const filtered = normalizedTerm ?
@@ -61,6 +66,7 @@ export async function fetchTransactions(filters: IListTransactionsDatagridFilter
     return { 
         items: paginated.map((transaction) => ({id: transaction.id, type: transaction.type, amount: transaction.amount, description: transaction.description, transactionDate: transaction.transactionDate, user: transaction.user, userId: transaction.userId})),
         total, page, limit, totalPages: Math.ceil(total/limit) || 1
+        , account: { balance }
     };
 }
 
