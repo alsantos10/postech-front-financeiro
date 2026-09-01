@@ -1,11 +1,13 @@
+"use client";
+
 import { formatCurrency } from "@/shared/formatting/currency";
 import { Eye, EyeOff } from "lucide-react";
 import { useState } from "react";
+import { useBalance } from "@/ui/hooks/useBalance";
+import { useAuth } from "@/ui/hooks/useAuth";
 
 interface BalanceCardProps {
     userName?: string;
-    balance: number;
-    loading?: boolean;
 }
 
 function getFormattedToday() {
@@ -19,8 +21,12 @@ function getFormattedToday() {
     return formatted.charAt(0).toUpperCase() + formatted.slice(1);
 }
 
-export function BalanceCard({ userName, balance, loading = false }: BalanceCardProps) {
+export function BalanceCard({ userName: userNameProp }: BalanceCardProps) {
     const [balanceVisible, setBalanceVisible] = useState(true);
+    const { user } = useAuth();
+    const { balance, loading } = useBalance();
+
+    const displayName = userNameProp || user?.name || 'Usuário';
 
     return (
         <div
@@ -33,7 +39,7 @@ export function BalanceCard({ userName, balance, loading = false }: BalanceCardP
         >
             <div className="relative z-10">
                 <div>
-                    <p className="text-lg font-semibold">Olá, {userName || 'Usuário'}!</p>
+                    <p className="text-lg font-semibold">Olá, {displayName}!</p>
                     <p className="mt-6 text-sm">{getFormattedToday()}</p>
                 </div>
             </div>

@@ -3,22 +3,12 @@
 import { useAuth } from "@/ui/context/AuthContext";
 import { User, UserCircle, UserCircle2, UserCircle2Icon } from "lucide-react";
 import Link from "next/link";
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 
 export function UserMenu() {
     const {user, logout} = useAuth();
     const [isOpen, setIsOpen] = useState(false);
     const menuRef = useRef<HTMLDivElement>(null);
-
-    useEffect(() => {
-        function handleClientOutSide(event: MouseEvent) {
-            if(menuRef.current && !menuRef.current.contains(event.target as Node)) {
-                setIsOpen(false);
-            }
-        }
-        document.addEventListener("mousedown", handleClientOutSide);
-        return () => document.removeEventListener("mousedown", handleClientOutSide);
-    }, []);
 
     async function handleLogout() {
         await logout();

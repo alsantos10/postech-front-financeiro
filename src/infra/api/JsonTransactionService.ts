@@ -39,7 +39,7 @@ export async function fetchTransactions(filters: IListTransactionsDatagridFilter
         const userTransactions: JsonTransaction[] = allTransactions
             .filter(t => t.userId === user.id)
             .map(transaction => ({ ...transaction }));
-        const balance = userTransactions.reduce((currentBalance, transaction) => {
+        const balance: number = userTransactions.reduce((currentBalance, transaction) => {
             const isCredit = transaction.type === TypeTransaction.DEPOSIT;
             return currentBalance + (isCredit ? transaction.amount : -transaction.amount);
         }, 0);
@@ -63,11 +63,12 @@ export async function fetchTransactions(filters: IListTransactionsDatagridFilter
     const startIndex = (page - 1) * limit; 
     const paginated = sorted.slice(startIndex, startIndex + limit);
 
-    return { 
+    const result: Paginated<Transaction> = { 
         items: paginated.map((transaction) => ({id: transaction.id, type: transaction.type, amount: transaction.amount, description: transaction.description, transactionDate: transaction.transactionDate, user: transaction.user, userId: transaction.userId})),
-        total, page, limit, totalPages: Math.ceil(total/limit) || 1
-        , account: { balance }
+        total, page, limit, totalPages: Math.ceil(total/limit) || 1,
+        account: { type: "corrente", balance }
     };
+    return result;
 }
 
 export async function findTransactionsByUserId(userId: string): Promise<JsonTransaction[] | null> {
@@ -102,6 +103,7 @@ export async function createTransaction(description: string, amount: number, typ
         throw new TransactionError("Erro ao criar transação");
     }
     const transaction: JsonTransaction = await response.json();
+    console.log('create transaction', transaction);
     return { id: transaction.id, type: transaction.type, amount: transaction.amount, description: transaction.description, transactionDate: transaction.transactionDate, user: user };
 }
 
